@@ -18,8 +18,8 @@ public class MergingArrays {
 		for (int i=0;i<a.length;i++) System.out.println(a[i]);
 	}
 
-	//At this point I assume you have done all sorting and searching questions
-	//If not complete them first
+	//At this point I assume you have done all sorting and searching questions.
+	//If not complete them first.
 	private static void merge(int[] a, int[] b) {
 		int n = a.length, m = b.length;
 		int lb = 0, rb = m, tb = 0;
