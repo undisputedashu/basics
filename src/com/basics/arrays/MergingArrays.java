@@ -1,5 +1,10 @@
 package com.basics.arrays;
 
+/**
+ * https://www.geeksforgeeks.org/merge-one-array-of-size-n-into-another-one-of-size-mn/
+ * @author ashu
+ *
+ */
 public class MergingArrays {
 
 	private static final Integer MIN = Integer.MIN_VALUE;
