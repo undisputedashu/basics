@@ -16,6 +16,7 @@ public class RotateArray {
 
 	private static void rotate(int[] a, int d) {
 		int n = a.length;
+		//Try to visualize or write state of array after every call to rotate
 		rotate(a, 0, d-1);
 		rotate(a, d, n-1);
 		rotate(a, 0, n-1);
