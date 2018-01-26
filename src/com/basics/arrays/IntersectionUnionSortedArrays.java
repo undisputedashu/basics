@@ -1,5 +1,10 @@
 package com.basics.arrays;
 
+/**
+ * https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/
+ * @author ashu
+ *
+ */
 public class IntersectionUnionSortedArrays {
 
 	public static void main(String args[]) {
