@@ -3,7 +3,9 @@ package com.basics.arrays;
 /**
  * https://www.geeksforgeeks.org/majority-element/
  * I have modified it a little bit, element should be present
- * equal to or more than half times
+ * equal to or more than half times.
+ * In case of odd number of elements in array it should be at least upper value of odd/2.(7/2=3.5 at least 4 times)
+ * For even number of elements in array it should be at least half.(8/2=4 at least 4 times)
  * @author ashu
  *
  */
