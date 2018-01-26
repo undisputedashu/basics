@@ -26,7 +26,12 @@ public class MajorityElement {
 			}
 		}
 		
-		cnt = 0;
+		checkAndPrint(a,majorityElement);
+	}
+
+	private static void checkAndPrint(int[] a, int majorityElement) {
+		int n = a.length;
+		int cnt = 0;
 		for (int i=0;i<n;i++) {
 			if (a[i] == a[majorityElement]) cnt++;
 		}
