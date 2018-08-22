@@ -5,7 +5,7 @@ public class LinkedList<T> {
 	private Node<T> start = null;
 	
 	LinkedList() {
-
+		start = new Node<T>();
 	}
 	
 	Node<T> getStart() {
@@ -18,28 +18,28 @@ public class LinkedList<T> {
 	
 	void add(T a[]) {
 		for (int i=0;i<a.length;i++) {
-			add(a[i]);
+			add(start, a[i]);
 		}
 	}
 	
-	void add(T data) {
-		Node<T> temp = new Node<T>(data);
-		if (start == null) {
-			start = temp;
+	void add(Node<T> p, T data) {
+		if (start.data == null) {
+			start.data = data;
+		} else if (p.next == null) {
+			p.next = new Node<T>(data);
 		} else {
-			Node<T> q = start;
-			while (q.next != null) {
-				q = q.next;
-			}
-			q.next = temp;
+			add(p.next, data);
 		}
 	}
-	
-	void trav() {
-		Node<T> p = start;
-		while (p != null) {
+
+	public void trav() {
+		trav(start);
+	}
+
+	void trav(Node<T> p) {
+		if (p != null) {
 			System.out.println(p.data);
-			p = p.next;
+			trav(p.next);
 		}
 	}
 	
@@ -52,5 +52,5 @@ public class LinkedList<T> {
 			this.next = null;
 		}
 	}
-	
+
 }
