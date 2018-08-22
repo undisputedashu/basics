@@ -32,7 +32,7 @@ public class LinkedList<T> {
 		}
 	}
 
-	public void trav() {
+	void trav() {
 		trav(start);
 	}
 
