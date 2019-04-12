@@ -21,9 +21,35 @@ public class InorderSuccessor {
         Node q = new Node(-1);
         i = inss(root, q, 28);
         System.out.println(i.data);
+        System.out.println("************************");
+        i = inss(root, 20);
+        System.out.println(i.data);
     }
     
-    //This method is written assuming all elements are positive
+    private static Node inss(Node p, int d) {
+    	Node q = p;
+    	while (q.data != d) {
+    		if (q.data > d) q = q.left;
+    		if (q.data < d) q = q.right;
+    	}
+    	
+    	if (q.right != null) return getMin(q.right);
+    	
+    	Node ins = null;
+    	while (p != null) {
+    		if (p.data > q.data) {
+    			ins = p;
+    			p = p.left;
+    		} else if (p.data < q.data) {
+    			p = p.right;
+    		} else {
+    			break;
+    		}
+    	}
+		return ins;
+	}
+
+	//This method is written assuming all elements are positive
     //will improve this method
     private static Node inss(Node p,Node q, int d) {
     	if (p != null) {
@@ -32,7 +58,7 @@ public class InorderSuccessor {
     			q.data = p.data;
     		}
     		if (p.data == d) {
-    			if (p.right != null) q = inss(p.right);
+    			if (p.right != null) q = getMin(p.right);
     			else q.data = -2;
     		}
     		inss(p.right, q, d);
@@ -40,7 +66,7 @@ public class InorderSuccessor {
 		return q;
 	}
 
-	private static Node inss(Node p) {
+	private static Node getMin(Node p) {
 		while(p.left != null) p = p.left;
 		return p;
 	}
