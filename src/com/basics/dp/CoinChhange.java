@@ -17,7 +17,6 @@ public class CoinChhange {
 	private static int cc(int[] c, int n, int s) {
 		if (s == 0) return 1;
 		if (s < 0 || n == 0) return 0;
-		
 		return cc(c, n, s-c[n-1]) + cc(c, n-1, s);
 	}
 
