@@ -2,7 +2,7 @@ package com.basics.dp;
 
 import java.util.Arrays;
 
-public class CoinChhange {
+public class CoinChange {
 
 	public static void main(String args[]) {
 		int c[] = {1,3,4};

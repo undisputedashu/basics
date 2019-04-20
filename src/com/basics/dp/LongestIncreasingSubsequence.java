@@ -1,5 +1,7 @@
 package com.basics.dp;
 
+import java.util.Arrays;
+
 public class LongestIncreasingSubsequence {
 
 	//if we don't use max, simply print value 'k' returned by lisRec
@@ -7,14 +9,15 @@ public class LongestIncreasingSubsequence {
 	private static int max = Integer.MIN_VALUE;
 	
 	public static void main(String args[]) {
-		int a[] = {1,3,5,4,2};
+		int a[] = {1,3,5,4,2,3,4};
 		int n = a.length;
-		@SuppressWarnings("unused")
 		int k = lisRec(a, n);
-		System.out.println(max);
+		System.out.println("Recursive result=" + max);
+		k = lisdp(a,n);
+		System.out.println("DP result=" + k);
 	}
 
-	private static int lisRec(int[] a, int n) {
+	private static int lisRec(int[] a, int n) { 
 		if (n == 1) return 1;
 		
 		int res = 1;
@@ -28,9 +31,25 @@ public class LongestIncreasingSubsequence {
 		return res;
 	}
 	
-	@SuppressWarnings("unused")
-	private static void lisdp(int[] a, int n) {
-		//coming soon
+	private static int lisdp(int[] a, int n) {
+		int t[] = new int[n];
+		Arrays.fill(t, 1);
+		int max = Integer.MIN_VALUE;
+		
+		for (int i=1;i<n;i++) {
+			for (int j=0;j<i;j++) {
+				if (a[i] > a[j] && t[j]+1>t[i]) {
+					t[i] = t[j] + 1;
+				}
+			}
+		}
+		
+		for (int i=0;i<n;i++) {
+			if (max < t[i]) {
+				max = t[i];
+			}
+		}
+		return max;
 	}
 	
 }
