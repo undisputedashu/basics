@@ -16,7 +16,7 @@ public class StockSellMultiple {
         printMaxProfit(a);
     }
 
-    private static void printMaxProfit(int[] a) {
+	private static void printMaxProfit(int[] a) {
         int maxDiff = 0;
         int minIndex = 0, sellIndex = 0;
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
@@ -30,6 +30,7 @@ public class StockSellMultiple {
             }
             if (a[i] < a[minIndex]) {
                 minIndex = i;
+                maxDiff = 0;
             }
         }
         
@@ -37,5 +38,24 @@ public class StockSellMultiple {
             System.out.println(e.getKey() + "  " + e.getValue());
         }
     }
+
+	private static void printMaxProfit2(int[] a) {
+		int n = a.length;
+		int maxDiff = 0, l = 0, r = 0;
+		for (int i=1;i<n;i++) {
+			int diff = a[i] - a[l];
+			if (diff > maxDiff) {
+				maxDiff = diff;
+				r = i;
+			} else if (a[i] < a[l]) {
+				if (maxDiff > 0) System.out.println(l + "  " + r);
+				l = i;
+				r = i;
+				maxDiff = 0;
+			}
+		}
+		
+		if (l != r) System.out.println(l + "  " + r);
+	}
     
 }
