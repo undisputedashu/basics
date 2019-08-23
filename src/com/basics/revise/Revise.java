@@ -1,39 +1,57 @@
 package com.basics.revise;
 
+//TODO kth smallest remains and inorder predecessor
 public class Revise {
-	
+
 	public static void main(String args[]) {
-		int a[] = {10,1,2};
-		int n = a.length;
-		int p = getPivot(a, 0, n-1);
-		System.out.println(p);
-		int k = 10;
-		int ind = -1;
-		if (p == a.length-1) {
-			ind = bs(a, 0, n-1, k);
-		} else {
-			ind = bs(a, 0, p, k);
-			ind = ind != -1 ? ind : bs(a,p+1,n-1,k);
-		}
-		System.out.println(ind);
-	}
-	
-	private static int bs(int[] a, int l, int r, int k) {
-		if (l > r) return -1;
-		int mid = l + (r-l)/2;
-		if (a[mid] == k) return mid;
-		if (a[mid]<k) return bs(a, mid+1, r, k);
-		return bs(a, l, mid-1, k);
+		int g[][] = new int[][] {
+			{0,2,7},
+			{2,0,3},
+			{7,3,0}
+		};
+		djikstra(g, 0);
 	}
 
-	private static int getPivot(int a[], int l, int r) {
-		if (l > r) return -1;
-		if (l == r) return l;
-		int mid = l + (r-l)/2;
-		if (mid+1 < a.length && a[mid] > a[mid+1]) return mid;
-		else if (mid-1 >= 0 && a[mid-1] > a[mid]) return mid-1;
-		else if (a[mid] > a[0]) return getPivot(a, mid+1, r);
-		else return getPivot(a, l, mid-1);
+	private static void djikstra(int[][] g, int src) {
+		int vertices = g.length;
+		boolean spt[] = new boolean[vertices];
+		int dist[] = new int[vertices];
+		for (int i=0;i<vertices;i++) {
+			spt[i] = false;
+			dist[i] = Integer.MAX_VALUE;
+		}
+		
+		dist[src] = 0;
+		
+		for (int cnt = 0;cnt<vertices;cnt++) {
+			int u = minDistVertex(dist, spt);
+			spt[u] = true;
+			
+			for (int v=0;v<vertices;v++) {
+				if (!spt[v] && g[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + g[u][v] < dist[v])
+					dist[v] = dist[u] + g[u][v];
+			}
+		}
+		
+		printSolution(dist);
+	}
+	
+	private static void printSolution(int dist[]) {
+		System.out.println("Vertex   Distance from Source");
+		for (int i = 0; i < dist.length; i++)
+			System.out.println(i + " tt " + dist[i]);
+	}
+
+
+	private static int minDistVertex(int[] dist, boolean[] spt) {
+		int minDist = Integer.MAX_VALUE, minIndex = -1;
+		for (int i=0;i<dist.length;i++) {
+			if (!spt[i] && dist[i]<minDist) {
+				minDist = dist[i];
+				minIndex = i;
+			}
+		}
+		return minIndex;
 	}
 	
 }

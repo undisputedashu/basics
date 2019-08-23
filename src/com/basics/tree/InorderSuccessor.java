@@ -2,6 +2,13 @@ package com.basics.tree;
 
 import com.basics.tree.Tree.Node;
 
+/**
+ * https://www.geeksforgeeks.org/inorder-successor-in-binary-search-tree/
+ * Take away is don't always think recursively
+ * Sometimes iteration gives way simpler solutions
+ * @author ashu
+ *
+ */
 public class InorderSuccessor {
 
 	private static Node root = new Node();
@@ -17,76 +24,29 @@ public class InorderSuccessor {
         System.out.println("**********************");
         Node i = ins(root, 20);
         System.out.println(i.data);
-        System.out.println("************************");
-        Node q = new Node(-1);
-        i = inss(root, q, 28);
-        System.out.println(i.data);
-        System.out.println("************************");
-        i = inss(root, 20);
-        System.out.println(i.data);
     }
     
-    private static Node inss(Node p, int d) {
-    	Node q = p;
-    	while (q.data != d) {
-    		if (q.data > d) q = q.left;
-    		if (q.data < d) q = q.right;
-    	}
-    	
-    	if (q.right != null) return getMin(q.right);
-    	
-    	Node ins = null;
-    	while (p != null) {
-    		if (p.data > q.data) {
-    			ins = p;
-    			p = p.left;
-    		} else if (p.data < q.data) {
-    			p = p.right;
-    		} else {
-    			break;
-    		}
-    	}
-		return ins;
+	private static Node ins(Node p, int d) {
+		Node q = p, succ = null;
+		while (q != null) {
+			if (d < q.data) {
+				succ = q;
+				q = q.left;
+			} else if (d > q.data) {
+				q = q.right;
+			} else {
+				if (q.right != null) {
+					return min(q.right);
+				}
+				break;
+			}
+		}
+		return succ;
 	}
 
-	//This method is written assuming all elements are positive
-    //will improve this method
-    private static Node inss(Node p,Node q, int d) {
-    	if (p != null) {
-    		inss(p.left, q, d);
-    		if (q.data == -2) {
-    			q.data = p.data;
-    		}
-    		if (p.data == d) {
-    			if (p.right != null) q = getMin(p.right);
-    			else q.data = -2;
-    		}
-    		inss(p.right, q, d);
-    	}
-		return q;
-	}
-
-	private static Node getMin(Node p) {
-		while(p.left != null) p = p.left;
+	private static Node min(Node p) {
+		while (p.left != null) p = p.left;
 		return p;
 	}
 
-	private static boolean found = false;
-    //Find out what is wrong with this method :D
-    //I did this mistake in one of the interview
-    //even in my case found = false was not there in if block
-    //this is intended to give a better understanding of recursion
-	private static Node ins(Node p, int i) {
-		if (p != null) {
-			ins(p.left, i);
-			if (found) {
-				found = false;
-				return p;
-			}
-			if (p.data == i) found = true;
-			ins(p.right, i);
-		}
-		return null;
-	}
-    
 }
