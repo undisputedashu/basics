@@ -6,33 +6,31 @@ public class ReverseEveryKNodesLL {
 		Node s = createLL();
 		trav(s);
 		System.out.println("Reverse every k nodes 1st::");
-		s = reverseKelements(s, 4);
+		s = reverseKelements(s, 3);
 		trav(s);
 		System.out.println("Reverse every k nodes 2nd::");
 		s = createLL();
-		s = reverseKelements2(s, 4);
+		s = reverseKelements2(s, 3);
 		trav(s);
 	}
 
-	private static Node reverseKelements2(Node s, int k) {
-		//1 2 3 4 5 6 7 , k = 4
-		//4 3 2 1 7 6 5
+	private static Node reverseKelements(Node s, int k) {
+		//1 2 3 4 5 6 7 8 , k = 3
+		//4 3 2 1 5 6 7 8
 		if (s == null || s.next == null || k<2 || k > getLength(s)) {
 			trav(s);
 			return s;
 		}
-		
 		Node prev = null, next = null, p = s, q = null;
 		while (p != null) {
-			q = p;
 			int ctr = 1;
-			while (q != null && ctr < k) {
+			q = p;
+			while(ctr < k && q != null) {
 				q = q.next;
 				ctr++;
 			}
 			if (q == null) {
-				p = rev(p);
-				prev.next = p;
+				prev.next = next;
 				break;
 			}
 			next = q.next;
@@ -49,23 +47,25 @@ public class ReverseEveryKNodesLL {
 		return s;
 	}
 
-	private static Node reverseKelements(Node s, int k) {
-		//1 2 3 4 5 6 7 , k = 4
-		//4 3 2 1 5 6 7
+	private static Node reverseKelements2(Node s, int k) {
+		//1 2 3 4 5 6 7 8, k = 3
+		//3 2 1 6 5 4 8 7
 		if (s == null || s.next == null || k<2 || k > getLength(s)) {
 			trav(s);
 			return s;
 		}
+		
 		Node prev = null, next = null, p = s, q = null;
 		while (p != null) {
-			int ctr = 1;
 			q = p;
-			while(ctr < k && q != null) {
+			int ctr = 1;
+			while (q != null && ctr < k) {
 				q = q.next;
 				ctr++;
 			}
 			if (q == null) {
-				prev.next = next;
+				p = rev(p);
+				prev.next = p;
 				break;
 			}
 			next = q.next;
@@ -110,6 +110,7 @@ public class ReverseEveryKNodesLL {
 		add(s,5);
 		add(s,6);
 		add(s,7);
+		add(s,8);
 		return s;
 	}
 
