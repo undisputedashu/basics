@@ -1,11 +1,6 @@
-package com.basics.graph;
+package com.basics.revise;
 
-/**
- * 
- * @author ashu
- *
- */
-public class Djikstra {
+public class Rev2 {
 	
 	public static void main(String args[]) {
 		int g[][] = new int[][] { 

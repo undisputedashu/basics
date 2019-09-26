@@ -36,13 +36,6 @@ public class Revise {
 		printSolution(dist);
 	}
 	
-	private static void printSolution(int dist[]) {
-		System.out.println("Vertex   Distance from Source");
-		for (int i = 0; i < dist.length; i++)
-			System.out.println(i + " tt " + dist[i]);
-	}
-
-
 	private static int minDistVertex(int[] dist, boolean[] spt) {
 		int minDist = Integer.MAX_VALUE, minIndex = -1;
 		for (int i=0;i<dist.length;i++) {
@@ -53,5 +46,11 @@ public class Revise {
 		}
 		return minIndex;
 	}
-	
+
+	private static void printSolution(int dist[]) {
+		System.out.println("Vertex   Distance from Source");
+		for (int i = 0; i < dist.length; i++)
+			System.out.println(i + " tt " + dist[i]);
+	}
+
 }
