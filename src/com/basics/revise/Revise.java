@@ -1,56 +1,40 @@
 package com.basics.revise;
 
 //TODO kth smallest remains and inorder predecessor
+//add new package for advance data structure and add trie to it
 public class Revise {
-
+	
 	public static void main(String args[]) {
-		int g[][] = new int[][] {
-			{0,2,7},
-			{2,0,3},
-			{7,3,0}
-		};
-		djikstra(g, 0);
-	}
-
-	private static void djikstra(int[][] g, int src) {
-		int vertices = g.length;
-		boolean spt[] = new boolean[vertices];
-		int dist[] = new int[vertices];
-		for (int i=0;i<vertices;i++) {
-			spt[i] = false;
-			dist[i] = Integer.MAX_VALUE;
-		}
-		
-		dist[src] = 0;
-		
-		for (int cnt = 0;cnt<vertices;cnt++) {
-			int u = minDistVertex(dist, spt);
-			spt[u] = true;
-			
-			for (int v=0;v<vertices;v++) {
-				if (!spt[v] && g[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + g[u][v] < dist[v])
-					dist[v] = dist[u] + g[u][v];
+		int a[][] = {
+                {1,2,3},
+                {4,5,6},
+                {7,8,9},
+                {-1,0,-1}
+            };
+		int m = a.length, n = a[0].length;
+		int k = 2;
+		int sum = 0;
+		for (int i=0;i<m;i++) {
+			for (int j=0;j<n;j++) {
+				if (a[i][j] != -1) {
+					sum = sum + mk(a,i,j,k);
+				}
 			}
 		}
+		System.out.println(sum);
+	}
+
+	private static int mk(int[][] a, int i, int j, int k) {
+		int m = a.length, n = a[0].length;
+		if (i < 0 || i >= m || j < 0 || j >= n) return 0;
+		if (a[i][j] == -1) return 0;
+		if (k == 1) return 1;
 		
-		printSolution(dist);
+		return mk(a, i+1, j, k-1) + 
+			   mk(a, i-1, j, k-1) + 
+			   mk(a, i, j+1, k-1) + 
+			   mk(a, i, j-1, k-1) + 
+			   mk(a,i,j,k-1);
 	}
 	
-	private static int minDistVertex(int[] dist, boolean[] spt) {
-		int minDist = Integer.MAX_VALUE, minIndex = -1;
-		for (int i=0;i<dist.length;i++) {
-			if (!spt[i] && dist[i]<minDist) {
-				minDist = dist[i];
-				minIndex = i;
-			}
-		}
-		return minIndex;
-	}
-
-	private static void printSolution(int dist[]) {
-		System.out.println("Vertex   Distance from Source");
-		for (int i = 0; i < dist.length; i++)
-			System.out.println(i + " tt " + dist[i]);
-	}
-
 }
