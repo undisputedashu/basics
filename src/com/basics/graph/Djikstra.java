@@ -1,7 +1,7 @@
 package com.basics.graph;
 
 /**
- * 
+ * https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
  * @author ashu
  *
  */
@@ -34,12 +34,12 @@ public class Djikstra {
 		dist[src] = 0;
 		
 		for (int i=0;i<vertices;i++) {
-			int min = findMin(dist, visited);
-			visited[min] = true;
+			int u = findMin(dist, visited);
+			visited[u] = true;
 			
 			for (int v=0;v<vertices;v++) {
-				if (!visited[v] && g[min][v] != 0 && dist[min] != Integer.MAX_VALUE) {
-					int newDist = dist[min] + g[min][v];
+				if (!visited[v] && g[u][v] != 0) {
+					int newDist = dist[u] + g[u][v];
 					if (newDist < dist[v]) {
 						dist[v] = newDist;
 					}

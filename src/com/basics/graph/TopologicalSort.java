@@ -1,10 +1,13 @@
 package com.basics.graph;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
-
+/**
+ * https://www.geeksforgeeks.org/topological-sorting/
+ * @author ashu
+ *
+ */
 public class TopologicalSort {
 
 	public static void main(String args[]) {
@@ -37,11 +40,9 @@ public class TopologicalSort {
 	private static void topo(int i, Graph g, boolean[] visited, Stack<Integer> stack) {
 		visited[i] = true;
 		
-		Iterator<Integer> it = g.adj[i].iterator();
-		while (it.hasNext()) {
-			int n = it.next();
-			if (!visited[n]) {
-				topo(n, g, visited, stack);
+		for (int x : g.adj[i]) {
+			if (!visited[x]) {
+				topo(x,g,visited,stack);
 			}
 		}
 		
