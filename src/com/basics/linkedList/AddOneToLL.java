@@ -4,12 +4,12 @@ public class AddOneToLL {
 
 	public static void main(String args[]) {
 		Node s = new Node();
-		add(s,8);
+		add(s,9);
 		add(s,9);
 		add(s,9);
 		trav(s);
 		System.out.println("Add one:");
-		int carry = add1(s);
+		int carry = add1Variation(s);
 		if (carry != 0) {
 			Node temp = new Node(carry);
 			temp.next = s;
@@ -29,6 +29,16 @@ public class AddOneToLL {
 		}
 		//Returning one as we have to add 1 to linked list
 		return 1;
+	}
+
+	private static int add1Variation(Node p) {
+		if (p == null) return 1;
+		int carry = add1Variation(p.next);
+		int sum = p.data + carry;
+		carry = sum/10;
+		sum = sum % 10;
+		p.data = sum;
+		return carry;
 	}
 
 	private static void trav(Node s) {

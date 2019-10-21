@@ -22,8 +22,9 @@ public class InorderSuccessor {
         t.add(root, 18);
         t.trav(root);
         System.out.println("**********************");
-        Node i = ins(root, 20);
-        System.out.println(i.data);
+        Node i = ins(root, 35);
+        if (i == null) System.out.println("No successor exist!!");
+        else System.out.println(i.data);
     }
     
 	private static Node ins(Node p, int d) {

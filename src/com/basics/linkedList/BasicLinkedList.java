@@ -1,5 +1,6 @@
 package com.basics.linkedList;
 
+
 /**
  * Simple implementation of linkedlist
  * @author ashu
@@ -14,8 +15,23 @@ public class BasicLinkedList {
 		add(s, 3);
 		add(s, 4);
 		trav();
+		System.out.println("reverse::");
+		s = rev(s);
+		trav();
 	}
-	
+
+	private static Node rev(Node s) {
+		Node p = s, q = s.next, r = null;
+		p.next = null;
+		while (q != null) {
+			r = q.next;
+			q.next = p;
+			p = q;
+			q = r;
+		}
+		return p;
+	}
+
 	private static void trav() {
 		Node p = s;
 		while (p != null) {

@@ -5,13 +5,45 @@ public class ReverseEveryKNodesLL {
 	public static void main(String args[]) {
 		Node s = createLL();
 		trav(s);
+		int k = 7;
 		System.out.println("Reverse every k nodes 1st::");
-		s = reverseKelements(s, 3);
+		s = reverseKelements(s, k);
 		trav(s);
 		System.out.println("Reverse every k nodes 2nd::");
 		s = createLL();
-		s = reverseKelements2(s, 3);
+		s = reverseKelements2(s, k);
 		trav(s);
+		System.out.println("Reverse every k nodes 3rd(reverse while traversing)::");
+		s = createLL();
+		s = revOptimized(s, k);
+		trav(s);
+	}
+
+	private static Node revOptimized(Node s, int k) {
+		//1 2 3 4 5 6 7 8, k = 3
+		//3 2 1 6 5 4 8 7
+		if (s == null || s.next == null || k<=1) return s;
+		Node prev = null, p = s, q = null;
+		while (p != null) {
+			int ctr = 0;
+			q = p.next; p.next = null;
+			Node t = p, r = null;;
+			while (q != null && ctr<k-1) {
+				r = q.next;
+				q.next = p;
+				p = q;
+				q = r;
+				ctr++;
+			}
+			if (prev == null) {
+				s = p;
+			} else {
+				prev.next = p;
+			}
+			prev = t;
+			p = r;
+		}
+		return s;
 	}
 
 	private static Node reverseKelements(Node s, int k) {

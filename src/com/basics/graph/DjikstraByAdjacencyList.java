@@ -6,19 +6,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+//In graph questions when to mark visited true is key
 public class DjikstraByAdjacencyList {
 
 	public static void main(String args[]) {
 		Graph graph = new Graph(4);
-		graph.addEdge(0, new Vertex(1, 4));
-		graph.addEdge(1, new Vertex(0, 4));
-		graph.addEdge(0, new Vertex(2, 7));
-		graph.addEdge(2, new Vertex(0, 7));
-		graph.addEdge(1, new Vertex(2, 2));
-		graph.addEdge(2, new Vertex(1, 2));
+		graph.addEdge(0, new Edge(1, 4));
+		graph.addEdge(1, new Edge(0, 4));
+		graph.addEdge(0, new Edge(2, 7));
+		graph.addEdge(2, new Edge(0, 7));
+		graph.addEdge(1, new Edge(2, 2));
+		graph.addEdge(2, new Edge(1, 2));
 		
-		graph.addEdge(2, new Vertex(3, 2));
-		graph.addEdge(1, new Vertex(3, 5));
+		graph.addEdge(2, new Edge(3, 2));
+		graph.addEdge(1, new Edge(3, 5));
 		djikstra(graph, 0);
 		System.out.println("Optimizing find min in djikstra::");
 		djikOptimized(graph, 0);
@@ -30,13 +31,13 @@ public class DjikstraByAdjacencyList {
 		int dist[] = new int[vertices];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 		dist[src] = 0;
-		PriorityQueue<Vertex> minheap = new PriorityQueue<Vertex>(new VertexComparator());
-		minheap.add(new Vertex(src, 0));
+		PriorityQueue<Edge> minheap = new PriorityQueue<Edge>(vertices, new VertexComparator());
+		minheap.add(new Edge(src, 0));
 		while (!minheap.isEmpty()) {
 			int u = minheap.poll().vertex;
 			visited[u] = true;
 			
-			for (Vertex v : graph.adj[u]) {
+			for (Edge v : graph.adj[u]) {
 				if (!visited[v.vertex]) {
 					int newDist = dist[u] + v.weight;
 					if (newDist < dist[v.vertex]) {
@@ -61,7 +62,7 @@ public class DjikstraByAdjacencyList {
 			int u = getMinIndex(dist, visited);
 			visited[u] = true;
 			
-			for (Vertex v : graph.adj[u]) {
+			for (Edge v : graph.adj[u]) {
 				if (!visited[v.vertex]) {
 					int newDist = dist[u] + v.weight;
 					if (newDist < dist[v.vertex]) {
@@ -93,7 +94,7 @@ public class DjikstraByAdjacencyList {
 
 	private static class Graph {
 		int vertices;
-		List<Vertex> adj[];
+		List<Edge> adj[];
 		Graph(int vertices) {
 			this.vertices = vertices;
 			adj = new LinkedList[vertices];
@@ -102,24 +103,24 @@ public class DjikstraByAdjacencyList {
 			}
 		}
 		
-		private void addEdge(int source, Vertex vertex) {
+		private void addEdge(int source, Edge vertex) {
 			adj[source].add(vertex);
 		}
 	}
 	
-	private static class Vertex {
+	private static class Edge {
 		int vertex;
 		int weight;
-		Vertex(int vertex, int weight) {
+		Edge(int vertex, int weight) {
 			this.vertex = vertex;
 			this.weight = weight;
 		}
 	}
 	
-	private static class VertexComparator implements Comparator<Vertex> {
+	private static class VertexComparator implements Comparator<Edge> {
 
 		@Override
-		public int compare(Vertex o1, Vertex o2) {
+		public int compare(Edge o1, Edge o2) {
 			return o1.weight < o2.weight ? -1 : 1;
 		}
 		
