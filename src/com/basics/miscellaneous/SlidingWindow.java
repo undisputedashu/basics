@@ -13,34 +13,34 @@ public class SlidingWindow {
 	private static void printMinInSlidingWindow(int[] a, int n, int w) {
 		
 		for (int i=0;i<w && i<n;i++) {
-			while (rear != null && a[i]<a[rear.ind]) deqr();
-			enq(i);
+			while (rear != null && a[i]<a[rear.ind]) dequeFromRear();
+			enqueAtRear(i);
 		}
 		
 		for (int i=w;i<n;i++) {
 			System.out.println(a[front.ind]);
-			while (front != null && front.ind<=i-w) deqf();
-			while(rear != null && a[i]<a[rear.ind]) deqr();
-			enq(i);
+			while (front != null && front.ind<=i-w) dequeFromFront();
+			while(rear != null && a[i]<a[rear.ind]) dequeFromRear();
+			enqueAtRear(i);
 		}
 		System.out.println(a[front.ind]);
 	}
 
-	private static void deqf() {
+	private static void dequeFromFront() {
 		if (front == null) return;
 		front = front.next;
 		if (front == null) rear = null;
 		else front.prev = null;
 	}
 	
-	private static void deqr() {
+	private static void dequeFromRear() {
 		if (rear == null) return;
 		rear = rear.prev;
 		if (rear == null) front = null;
 		else rear.next = null;
 	}
 	
-	private static void enq(int i) {
+	private static void enqueAtRear(int i) {
 		Node temp = new Node(i);
 		if (front == null) {
 			front = rear = temp;
