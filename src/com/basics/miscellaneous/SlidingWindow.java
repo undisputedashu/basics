@@ -1,11 +1,16 @@
 package com.basics.miscellaneous;
 
+/**
+ * 
+ * @author ashu
+ * https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/
+ */
 public class SlidingWindow {
 
 	private static Node front, rear;
 	
 	public static void main(String args[]) {
-		int a[] = {5,4,3,4,5,0};
+		int a[] = {5,2,3,4,3};
 		int n = a.length, w = 3;
 		printMinInSlidingWindow(a,n,w);
 	}
@@ -19,7 +24,7 @@ public class SlidingWindow {
 		
 		for (int i=w;i<n;i++) {
 			System.out.println(a[front.ind]);
-			while (front != null && front.ind<=i-w) dequeFromFront();
+			while (front != null && i-w>=front.ind) dequeFromFront();
 			while(rear != null && a[i]<a[rear.ind]) dequeFromRear();
 			enqueAtRear(i);
 		}
