@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import com.basics.revise.Revise;
-
 //In graph questions when to mark visited true is key
 public class DjikstraByAdjacencyList {
 
