@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import com.basics.revise.Revise;
+
 //In graph questions when to mark visited true is key
 public class DjikstraByAdjacencyList {
 
@@ -22,16 +24,60 @@ public class DjikstraByAdjacencyList {
 		graph.addEdge(1, new Edge(3, 5));
 		djikstra(graph, 0);
 		System.out.println("Optimizing find min in djikstra::");
-		djikOptimized(graph, 0);
+		djikOptimized(graph, 0);//it has bug 
+		System.out.println("Djik proper optimized");
+		djik(graph, 0);
 	}
 
+	private static void djik(Graph graph, int src) {
+		boolean vis[] = new boolean[graph.vertices];
+		int dist[] = new int[graph.vertices];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		dist[src] = 0;
+		PriorityQueue<Vertex> pq = new PriorityQueue<Vertex>(graph.vertices, new VertexComparator());
+		pq.add(new Vertex(src, 0));
+		
+		while (!pq.isEmpty()) {
+			int u = pq.poll().v;
+			vis[u] = true;
+			
+			for (Edge e:graph.adj[u]) {
+				if (!vis[e.vertex] && dist[u] + e.weight < dist[e.vertex]) {
+					dist[e.vertex] = dist[u] + e.weight;
+					pq.add(new Vertex(e.vertex, dist[e.vertex]));
+				}
+			}
+		}
+		
+		printSolution(dist);
+	}
+
+	private static class Vertex {
+		int v;
+		int d;
+		Vertex(int v, int d) {
+			this.v = v;
+			this.d = d;
+		}
+	}
+	
+	private static class VertexComparator implements Comparator<Vertex> {
+		
+		@Override
+		public int compare(Vertex v1, Vertex v2) {
+			return v1.d < v2.d ? -1 : 1;
+		}
+		
+	}
+
+	//It has bug to be reviewed
 	private static void djikOptimized(Graph graph, int src) {
 		int vertices = graph.vertices;
 		boolean visited[] = new boolean[vertices];
 		int dist[] = new int[vertices];
 		Arrays.fill(dist, Integer.MAX_VALUE);
 		dist[src] = 0;
-		PriorityQueue<Edge> minheap = new PriorityQueue<Edge>(vertices, new VertexComparator());
+		PriorityQueue<Edge> minheap = new PriorityQueue<Edge>(vertices, new EdgeComparator());
 		minheap.add(new Edge(src, 0));
 		while (!minheap.isEmpty()) {
 			int u = minheap.poll().vertex;
@@ -117,7 +163,7 @@ public class DjikstraByAdjacencyList {
 		}
 	}
 	
-	private static class VertexComparator implements Comparator<Edge> {
+	private static class EdgeComparator implements Comparator<Edge> {
 
 		@Override
 		public int compare(Edge o1, Edge o2) {
