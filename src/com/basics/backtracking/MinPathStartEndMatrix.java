@@ -1,4 +1,4 @@
-package com.basics.miscellaneous;
+package com.basics.backtracking;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -15,13 +15,54 @@ public class MinPathStartEndMatrix {
 		};
 		int m = mat.length, n = mat[0].length;
 		max = m*n + 10;
+		System.out.println("Backtracking 1 :");
 		int cnt = cnt(mat,0,0);
 		System.out.println(cnt);
+		System.out.println("Backtracking 2 :");
+		co[0] = new Coordinate(1,0);
+		co[1] = new Coordinate(-1, 0);
+		co[2] = new Coordinate(0, 1);
+		co[3] = new Coordinate(0, -1);
+		cnt = find(mat,0,0);
+		System.out.println(cnt);
+		System.out.println("Print path::");
 		Deque<String> qu = new LinkedList<>();
 		cnt(mat,0,0,qu);
 		System.out.println(que);
 	}
 	
+	private static int MAX = Integer.MAX_VALUE;
+	private static Coordinate co[] = new Coordinate[4];
+	
+	private static int find(String mat[][], int i, int j) {
+		int m = mat.length, n = mat[0].length;
+		if (i == m-1 && j == n-1) return 0;
+		if (i<0 || i >= m) return MAX;
+		if (j<0 || j >= n) return MAX;
+		if (mat[i][j].equals("x")) return MAX;
+		if (mat[i][j].equals("y")) return MAX;
+		
+		mat[i][j] = "y";
+		int min = MAX;
+		for (int k=0;k<co.length;k++) {
+			int sum = find(mat, i+co[k].x, j+co[k].y);
+			if (sum != MAX && 1 + sum < min) {
+				min = 1 + sum;
+			}
+		}
+		
+		mat[i][j] = "";
+		return min;
+	}
+	
+	private static class Coordinate {
+		int x,y;
+		Coordinate(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
+
 	private static Deque<String> que = new LinkedList<>();
 	//Now we can apply dp 
 	private static int cnt(String[][] mat, int i, int j, Deque<String> qu) {
