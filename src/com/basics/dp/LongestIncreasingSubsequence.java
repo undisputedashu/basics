@@ -11,12 +11,12 @@ public class LongestIncreasingSubsequence {
 	private static int max = Integer.MIN_VALUE;
 	
 	public static void main(String args[]) {
-		int a[] = {1,3,5,1};
+		int a[] = { 50,3,10,7,40,1};
 		int n = a.length;
-		int k = lisRec(a, n);
-		System.out.println("Recursive result=" + k);
-		k = lisdp(a,n);
-		System.out.println("DP result=" + max);
+		lisRec(a, n);
+		System.out.println("Recursive result=" + max);
+		int k = lisdp(a,n);
+		System.out.println("DP result=" + k);
 	}
 
 	private static int lisRec(int[] a, int n) { 
