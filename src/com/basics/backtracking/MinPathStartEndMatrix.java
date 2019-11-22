@@ -34,6 +34,7 @@ public class MinPathStartEndMatrix {
 	private static int MAX = Integer.MAX_VALUE;
 	private static Coordinate co[] = new Coordinate[4];
 	
+	//Cleaner use of backtracking
 	private static int find(String mat[][], int i, int j) {
 		int m = mat.length, n = mat[0].length;
 		if (i == m-1 && j == n-1) return 0;

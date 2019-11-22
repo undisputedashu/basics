@@ -1,6 +1,5 @@
 package com.basics.dp;
 
-
 /**
  * https://www.geeksforgeeks.org/find-the-longest-path-in-a-matrix-with-given-constraints/
  * @author asasjha
@@ -8,6 +7,14 @@ package com.basics.dp;
  */
 public class LongestMatrixPath {
 	
+	private static Coordinate co[] = new Coordinate[4];
+	static {
+		co[0] = new Coordinate(1, 0);
+		co[1] = new Coordinate(-1, 0);
+		co[2] = new Coordinate(0, 1);
+		co[3] = new Coordinate(0, -1);
+	}
+
 	public static void main(String args[]) {
 		int a[][] = {
 				{1, 2, 9},
@@ -18,7 +25,7 @@ public class LongestMatrixPath {
 		int max = 0;
 		for (int i=0;i<m;i++) {
 			for (int j=0;j<n;j++) {
-				int k = lp(a,i,j);
+				int k = lp2(a,i,j);
 				if (k > max) max = k;
 			}
 		}
@@ -36,6 +43,30 @@ public class LongestMatrixPath {
 			}
 		}
 		System.out.println(max);
+	}
+
+	private static int lp2(int a[][], int i, int j) {
+		int m = a.length, n = a[0].length;
+		if (i<0 || i >= m) return 0;
+		if (j<0 || j>=n) return 0;
+		
+		int max = 1;
+		for (int k=0;k<co.length;k++) {
+			int x = i + co[k].x , y = j + co[k].y;
+			if (x>=0 && x<m && y>=0 && y<n && a[x][y] == a[i][j]+1) {
+				int cnt = 1 + lp2(a,x,y);
+				if (cnt > max) max = cnt;
+			}
+		}
+		return max;
+	}
+	
+	private static class Coordinate {
+		private int x,y;
+		Coordinate(int x,int y) {
+			this.x = x;
+			this.y = y;
+		}
 	}
 
 	private static int lpd(int[][] a, int i, int j, int[][] t) {

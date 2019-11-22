@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AllPossibleBst {
 
 	public static void main(String args[]) {
-		ArrayList<Node> totalTreesFrom1toN = constructTrees(1, 2);
+		ArrayList<Node> totalTreesFrom1toN = constructTrees(1, 3);
 		/* Printing preorder traversal of all constructed BSTs */
 		System.out.println("Preorder traversals of all constructed BSTs are :");
 		for (int i = 0; i < totalTreesFrom1toN.size(); i++) {

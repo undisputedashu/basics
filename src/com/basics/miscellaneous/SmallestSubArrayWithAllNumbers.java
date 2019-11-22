@@ -39,6 +39,7 @@ public class SmallestSubArrayWithAllNumbers {
 		}
 		
 		System.out.println(front.ind + "   " + rear.ind);
+		System.out.println("Smallest subarray size : " + min);
 	}
 	
 	private static void enqueAtRear(int d) {
