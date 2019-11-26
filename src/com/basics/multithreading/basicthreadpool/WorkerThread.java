@@ -5,7 +5,7 @@ import java.util.concurrent.BlockingQueue;
 public class WorkerThread extends Thread {
 
 	private BlockingQueue<Runnable> taskQueue;
-	private Boolean isStopped;
+	private Boolean isStopped = false;
 	
 	public WorkerThread(BlockingQueue<Runnable> taskQueue) {
 		this.taskQueue = taskQueue;
@@ -14,6 +14,7 @@ public class WorkerThread extends Thread {
 	public void run() {
 		while (!isStopped) {
 			try {
+				System.out.println(Thread.currentThread().getName());
 				Runnable task = (Runnable) taskQueue.take();
 				task.run();
 			} catch (InterruptedException e) {

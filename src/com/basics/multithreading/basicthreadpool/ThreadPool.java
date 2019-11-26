@@ -1,3 +1,4 @@
+
 package com.basics.multithreading.basicthreadpool;
 
 import java.util.ArrayList;
@@ -34,6 +35,5 @@ public class ThreadPool {
            thread.doStop();
         }
     }
-	
-	
+		
 }
