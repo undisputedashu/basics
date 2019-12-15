@@ -47,7 +47,7 @@ public class StockSellMultiple {
 			if (diff > maxDiff) {
 				maxDiff = diff;
 				r = i;
-			} else if (a[i] < a[l]) {
+			} else if (a[i] < a[i-1]) {
 				if (maxDiff > 0) System.out.println(l + "  " + r);
 				l = i;
 				r = i;
