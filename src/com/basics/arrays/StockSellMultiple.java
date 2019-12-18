@@ -12,7 +12,7 @@ import java.util.Map.Entry;
 public class StockSellMultiple {
 
     public static void main(String args[]) {
-        int a[] = {100, 180, 260, 310, 40, 535, 695};
+        int a[] = {23,13,25,29,33,19,34,45,65,67};
         printMaxProfit(a);
     }
 
@@ -47,7 +47,7 @@ public class StockSellMultiple {
 			if (diff > maxDiff) {
 				maxDiff = diff;
 				r = i;
-			} else if (a[i] < a[l]) {
+			} else if (a[i] < a[i-1]) {
 				if (maxDiff > 0) System.out.println(l + "  " + r);
 				l = i;
 				r = i;
