@@ -53,7 +53,7 @@ public class SearchInRotatedSortedArray {
 		int mid = l + (r-l)/2;
 		if (mid+1 < a.length && a[mid] > a[mid+1]) return mid;
 		else if (mid-1 > 0 && a[mid-1] > a[mid]) return mid-1;
-		else if (a[mid] > a[0]) return getPivot(a, mid+1, r);
+		else if (a[mid] > a[l]) return getPivot(a, mid+1, r);
 		else return getPivot(a, l, mid-1);
 	}
 	
