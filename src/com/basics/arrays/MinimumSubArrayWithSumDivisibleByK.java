@@ -12,6 +12,8 @@ a[] = 1 2 2 8
 1 2 2 has sum 5 divisible by 5, length of subarray 3
 2 8 has sum 10 divisible by 5 , length of subarray 2
 so ans is 2
+
+return -1 if there is no subarray with sum divisible by k
  */
 public class MinimumSubArrayWithSumDivisibleByK {
 	
