@@ -45,10 +45,8 @@ public class MinimumSubArrayWithSumDivisibleByK {
     		if (map.containsKey(t[i])) {
     			diff = i - map.get(t[i]);
     			if (diff < min) min = diff;
-    			map.put(t[i], i);
-    		} else {
-    			map.put(t[i], i);
     		}
+    		map.put(t[i], i);
     	}
     	if (min == Integer.MAX_VALUE) return -1;
 		return min;
