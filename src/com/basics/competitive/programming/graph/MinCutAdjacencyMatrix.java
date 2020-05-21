@@ -14,12 +14,13 @@ public class MinCutAdjacencyMatrix {
 		Scanner in = new Scanner(System.in);
 		int t = in.nextInt();
 		while (t-->0) {
-			int n = in.nextInt(), m = n*n;
+			int n = in.nextInt();
 			int graph[][] = new int[n][n];
 			for (int i=0;i<n;i++) Arrays.fill(graph[i], 0);
 			
 			for (int i=0;i<n;i++) {
 				for (int j=0;j<n;j++) {
+					//edge weight for i to j
 					graph[i][j] = in.nextInt();
 				}
 			}
