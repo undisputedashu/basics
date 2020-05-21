@@ -1,14 +1,17 @@
 package com.basics.advance.datastructure;
+
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.*;
-
+import java.util.Arrays;
 
 /**
+ * https://codeforces.com/blog/entry/61364
  * https://codeforces.com/contest/1354/problem/D
+ * @author Lenovo
+ *
  */
-public class BinaryIndexedTreeWithBinarySearch {
+public class BinaryIndexedTreeWithBinaryLifting {
 
 	public static void main(String args[]) throws IOException {
 		Reader in = new Reader();
@@ -30,33 +33,18 @@ public class BinaryIndexedTreeWithBinarySearch {
 			int ind = in.nextInt();
 			if (ind>0) {
 				bit.updateBIT(n+1, ind, 1);
-			}
-			else {
+			} else {
 				ind = Math.abs(ind);
-				int l = 0, r = a.length;
-				while (l<r) {
-					int mid = l + (r-l)/2;
-					int sum = bit.getSum(mid);
-					if (ind<=sum) r = mid;
-					else l = mid+1;
-				}
-				bit.updateBIT(a.length, l, -1);
+				int index = bit.search(ind, a.length);
+				bit.updateBIT(a.length, index, -1);
 			}
 		}
 		
-		int ans = bit.getSum(n);
-		if (ans<=0) {
+		if (bit.getSum(n) == 0) {
 			System.out.println(0);
-			return;
+		} else {
+			System.out.println(bit.search(1, n));
 		}
-		int l=0, r = a.length;
-		while (l<r) {
-			int mid = l+(r-l)/2;
-			int sum = bit.getSum(mid);
-			if (ans<=sum) r = mid;
-			else l = mid+1;
-		}
-		System.out.println(l);
 	}
  
 	static class BinaryIndexedTree {
@@ -64,13 +52,24 @@ public class BinaryIndexedTreeWithBinarySearch {
 		final static int MAX = 1048576;
 		static int bit[] = new int[MAX];
 
+		int search(int sum, int n) {
+			int x = 0;
+			for(int i = 22; i >= 0; i--) {
+				int newX = x + (1 << i);
+				if(newX <= n && sum > bit[newX]) {
+					x = newX;
+					sum -= bit[x];
+				}
+			}
+			//returning x as while updating, updae code is incrementing index by 1
+			//ideally x+1 should be returned
+			return x;
+		}
+		
 		int getSum(int index) {
 			int sum = 0;
-			index = index + 1;
-
-			while (index > 0) {
-				sum += bit[index];
-				index -= index & (-index);
+			for (int i=index+1;i>0;i-=i&(-i)) {
+				sum = sum + bit[i];
 			}
 			return sum;
 		}
