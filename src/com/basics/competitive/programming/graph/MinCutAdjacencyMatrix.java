@@ -26,12 +26,12 @@ public class MinCutAdjacencyMatrix {
 			}
 			
 			int s = in.nextInt(), st = in.nextInt();
-			findMaxFlow(graph, n, s, st);
+			findMaxFlowAndMincut(graph, n, s, st);
 		}
 		in.close();
 	}
 
-	private static void findMaxFlow(int[][] graph, int n, int s, int t) {
+	private static void findMaxFlowAndMincut(int[][] graph, int n, int s, int t) {
 		int rg[][] = new int[n][n];
 		for (int i=0;i<n;i++)
 			for (int j=0;j<n;j++) rg[i][j] = graph[i][j];
