@@ -9,7 +9,7 @@ import java.util.*;
  * https://codeforces.com/contest/1272/problem/E
  * Multi source bfs and adjacency list using 2-D array
  */
-public class Codeforces {
+public class MultiSourceBfs {
 
 	static int max = (int)1e7;
 	public static void main(String args[]) throws IOException {
