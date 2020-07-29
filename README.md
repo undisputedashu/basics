@@ -10,6 +10,6 @@ Start in this way:-
 3. Arrays
 4. Strings
 5. LinkedList
-6. Tree
+6. Tree (Do AllPossibleBst and AllPossibleBstCount after doing Dynamic programming)
 7. DP(Dynamic programming at last, spend days/weeks to get recursive solution.
 Once you get good at writing recursive solution, then think about storing results in tables. Tough part is writing recursive solution. Spend time try yourself, discuss with friends. If you are not able to write in first attempt, then copy code do dry run and debug, draw recursion diagram on paper. Initially it will be difficult, but in your second or third attempt on problems you will begin to understand patterns. Then it will be easy for you.)
