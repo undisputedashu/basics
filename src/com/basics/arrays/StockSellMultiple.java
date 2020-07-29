@@ -20,6 +20,7 @@ public class StockSellMultiple {
 			for (int i=0;i<n;i++) a[i] = in.nextInt();
 			maxProfit(a, n);
 		}
+		
 		in.close();
 	}
 
