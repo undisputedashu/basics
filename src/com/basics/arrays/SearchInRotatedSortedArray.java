@@ -27,16 +27,15 @@ public class SearchInRotatedSortedArray {
 	}
 	
 	private static int find(int[] a, int l, int r, int k) {
-		if (l > r) return -1;
+		if (l>r) return -1;
 		int mid = l + (r-l)/2;
 		if (a[mid] == k) return mid;
-		if (a[0] < a[mid]) {
-			if (k >= a[0] && k <= a[mid])
-				return find(a, l, mid, k);
-			return find(a, mid+1, r, k);
+		if (a[l]<=a[mid]) {
+			if (k>=a[l] && k<a[mid]) return find(a,l,mid-1,k);
+			return find(a,mid+1,r,k);
 		}
-		if (k >= a[mid] && k <= a[r]) return find(a, mid+1, r, k);
-		return find(a, l, mid-1, k);
+		if (k>a[mid] && k<=a[r]) find(a,mid+1,r,k);
+		return find(a,l,mid-1,k);
 	}
 
 	private static int bs(int[] a, int l, int r, int k) {
