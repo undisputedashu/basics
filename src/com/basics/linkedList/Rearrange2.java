@@ -1,6 +1,7 @@
 package com.basics.linkedList;
 
 /**
+ * https://www.geeksforgeeks.org/rearrange-a-linked-list-such-that-all-even-and-odd-positioned-nodes-are-together/
  * Rearrange so that first odd nodes then even
  * 1 2 3 4 5 -> 1 3 5 2 4
  * @author ashu
