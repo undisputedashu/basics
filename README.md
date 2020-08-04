@@ -1,4 +1,5 @@
 # basics
+
 Meant for people who are beginners and people who are facing difficulty to become good at data structure and algorithms. Problem links at top of the class.
 Complete few simple questions that are here and you will be confident. Then it depends on you where you want to take your
 skill level, but you won't find anything beyond reach after doing these simple questions. Remember repetition is key to 
@@ -14,7 +15,11 @@ Start in this way:-
 5. LinkedList
 6. Tree (Do AllPossibleBst and AllPossibleBstCount after doing Dynamic programming)
 7. DP(Dynamic programming at last, spend days/weeks to get recursive solution.
-Once you get good at writing recursive solution, then think about storing results in tables. Tough part is writing recursive solution. Spend time try yourself, discuss with friends. If you are not able to write in first attempt, then copy code do dry run and debug, draw recursion diagram on paper. Initially it will be difficult, but in your second or third attempt on problems you will begin to understand patterns. Then it will be easy for you.)
+	  Once you get good at writing recursive solution, then think about storing results in tables. 
+	  Tough part is writing recursive solution. Spend time try yourself, discuss with friends. 
+	  If you are not able to write in first attempt, then copy code do dry run and debug, 
+	  draw recursion diagram on paper. Initially it will be difficult, but in your second or third 
+	  attempt on problems you will begin to understand patterns. Then it will be easy for you.)
 		a. LongestCommonSubsequence
 		b. CoinChange
 		c. LongestIncreasingSubsequence
