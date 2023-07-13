@@ -51,5 +51,23 @@ public class StockSellMultiple {
 		}
 		
 	}
+
+	private static ArrayList<ArrayList<Integer>> stockBuySell(int a[], int n) {
+	        ArrayList<ArrayList<Integer>> lists = new ArrayList<ArrayList<Integer> >();
+	        int s=0, e = 0;
+	        for (int i=0;i<n;i++) {
+	            if (a[i]>a[e]) e = i;
+	            if (a[i]<a[e] || i == n-1) {
+	                if (a[e]>a[s]) {
+	                    ArrayList<Integer> list = new ArrayList<>();
+	                    list.add(s);
+	                    list.add(e);
+	                    lists.add(list);
+	                }
+	                s = e = i;
+	            }
+	        }
+	        return lists;
+    }
     
 }
