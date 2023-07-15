@@ -48,27 +48,33 @@ public class MinimumSubArrayWithSumDivisibleByK {
     		}
     		map.put(t[i], i);
     	}
+	
     	if (min == Integer.MAX_VALUE) return -1;
-		return min;
-	}
+	
+	return min;
+   }
 
     //O(n^2)
-	static int subOptimalSolution(int n, int k, int[] a) {
-    	long t[] = new long[n];
-    	
-    	t[0] = a[0];
-    	for (int i=1;i<n;i++) t[i] = t[i-1] + a[i];
-    	
-    	int min = Integer.MAX_VALUE;
-    	for (int i=0;i<n-1;i++) {
-    		for (int j=i+1;j<n;j++) {
-    			long diff = t[i] - t[j];
-    			if (diff % k == 0 && j-i<min) min = j-i;
-    		}
-    	}
-    	
-    	if (min == Integer.MAX_VALUE) return -1;
-    	return min;
+   private static int subOptimalSolution(int a[], int n, int k) {
+	        if (n == 0) return -1;
+	        if (a[0] % k == 0) return 1;
+	        
+	        int min = Integer.MAX_VALUE;
+	        int t[] = new int[n];
+	        t[0] = a[0];
+	        for (int i=1;i<n;i++) {
+	            t[i] = a[i] + t[i-1];
+	            if (t[i]%k == 0) min = Math.min(min, i+1);
+	        }
+	        
+	        for (int i=0;i<n;i++) {
+	            for (int j=i+1;j<n;j++) {
+	                int diff = t[j] - t[i];
+	                if (diff % k == 0) min = Math.min(min, j-i);
+	            }
+	        }
+	        
+	        return min == Integer.MAX_VALUE ? -1 : min;
     }
 
 }
